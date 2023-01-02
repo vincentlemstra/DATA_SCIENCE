@@ -85,7 +85,37 @@ FROM mhl_suppliers AS supplier
 WHERE district.name = 'Limburg' OR district.name = 'Brabant' OR district.name = 'Zeeland'
 
 -- 4.1.7
-
+SELECT
+    C1.name AS C1_name,
+    C2.name AS C2_name,
+    C1.id AS C1_id,
+    C2.id AS C2_id,
+    C1.commune_ID AS C1_commune_ID,
+    C2.commune_ID AS C2_commune_ID
+FROM mhl_cities AS C1
+    JOIN mhl_cities AS C2
+        ON C2.name = C1.name 
+-- GROUP BY C1.name (fout) > Educom antwoord:
+WHERE C1.id < C2.id
+ORDER BY C1_name
 
 -- 4.1.8
+SELECT
+    C1.name AS C1_name,
+    C2.name AS C2_name,
+    C1.id AS C1_id,
+    C2.id AS C2_id,
+    C1.commune_ID AS C1_commune_ID,
+    C2.commune_ID AS C2_commune_ID,
+    C1_commune.name AS C1_commune_name,
+    C2_commune.name AS C2_commune_name
+FROM mhl_cities AS C1
+    JOIN mhl_cities AS C2
+        ON C2.name = C1.name 
+    JOIN mhl_communes AS C1_commune
+        ON C1_commune.id = C1.commune_ID
+    JOIN mhl_communes AS C2_commune
+        ON C2_commune.id = C2.commune_ID
+WHERE C1.id < C2.id AND NOT C1.commune_ID = 0
+ORDER BY C1_name
 
