@@ -26,5 +26,3 @@ SELECT
     SUM(hitcount)
 FROM mhl_hitcount
 GROUP BY year, month
-
--- 5.1.4
